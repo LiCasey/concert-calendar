@@ -1,0 +1,16 @@
+import urllib2
+
+def getHtml(url):
+    page = urllib2.urlopen(url)
+    html = page.read()
+    return html
+
+def getNcpaBymonth(month):
+    url = "http://www.chncpa.org/was5/web/search?channelid=263964&ycid=73&month="+month
+    html = getHtml(url)
+
+    return html
+
+if __name__=='__main__':
+    html = getNcpaBymonth('2017-03')
+    print html
