@@ -5,6 +5,7 @@ def getHtml(url):
     return html
 
 def getNcpaBymonth(month):
+    print 'method: getNcpaBymonth'
     url = "http://www.chncpa.org/was5/web/search?channelid=263964&ycid=73&month="+month
     html = getHtml(url)
 
