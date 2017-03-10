@@ -33,6 +33,10 @@ def get_concert_data(year,month):
     bj_hall_data = bjConcertHall.getBJConcertHallByMonth(s)
     concert_data.extend(bj_hall_data)
 
+    import zhongShanHall
+    zs_hall_data = zhongShanHall.getZhongShanByMonth(s)
+    concert_data.extend(zs_hall_data)
+
     return concert_data
 
 
