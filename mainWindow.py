@@ -15,12 +15,25 @@ def get_available_years(t):
 
 
 def get_concert_data(year,month):
+    concert_data = []
+
+    # 获取国家大剧院数据
     import getNcpa
     s = '%d-%02d'%(year,month)
     ncpa_html = getNcpa.getNcpaBymonth(s)
     ncpa_data = eval(ncpa_html)
 
-    return ncpa_data
+    for n in ncpa_data:
+        n['VNAME'] = '国家大剧院'+n['VNAME']
+
+    concert_data.extend(ncpa_data)
+
+    # 获取北京音乐厅数据
+    import bjConcertHall
+    bj_hall_data = bjConcertHall.getBJConcertHallByMonth(s)
+    concert_data.extend(bj_hall_data)
+
+    return concert_data
 
 
 def init_calendar(year,month):
@@ -92,7 +105,7 @@ def get_concert_info_by_day(dayString,concert_data):
     infoString = ''
     for dict in concert_data:
         if dict['SHOWDATE']==dayString:
-            infoString+='国家大剧院'+dict['VNAME']+'：'+dict['PRODUCTNAME']+' '+dict['PLAYTIME']+'\n\n'
+            infoString+=dict['VNAME']+'：'+dict['PRODUCTNAME']+'\n\n'
     return infoString
 
 
@@ -127,7 +140,7 @@ if __name__=="__main__":
     options_labelPanel = Tkinter.LabelFrame(leftFrame,text="显示选项")
     options_labelPanel.pack()
 
-    textdisplay='目前支持的音乐厅列表：国家大剧院'
+    textdisplay='目前支持的音乐厅列表：国家大剧院、北京音乐厅'
     text_label = Tkinter.Label(options_labelPanel, text=textdisplay+'\n', justify=Tkinter.LEFT,wraplength=350,width=50,
                                fg="blue")
     text_label.pack()
