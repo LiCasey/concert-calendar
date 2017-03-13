@@ -144,7 +144,7 @@ if __name__=="__main__":
     options_labelPanel = Tkinter.LabelFrame(leftFrame,text="显示选项")
     options_labelPanel.pack()
 
-    textdisplay='目前支持的音乐厅列表：国家大剧院、北京音乐厅'
+    textdisplay='目前支持的音乐厅列表：国家大剧院、北京音乐厅、中山公园音乐堂'
     text_label = Tkinter.Label(options_labelPanel, text=textdisplay+'\n', justify=Tkinter.LEFT,wraplength=350,width=50,
                                fg="blue")
     text_label.pack()

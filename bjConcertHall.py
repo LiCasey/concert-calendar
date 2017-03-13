@@ -34,14 +34,19 @@ def getDataByMonthAndPage(year,month,page,count):
 
     l = []
     for b in box:
-        dict = {}
-        dict['VNAME'] = '北京音乐厅'
+
         ul = b.find('ul')
         lil = ul.find_all('li')
-        dict['PRODUCTNAME'] = (lil[0].a.text).decode("string_escape")
-        timestr = (lil[1].text).decode("string_escape")
-        dict['SHOWDATE'] = (datetime.strptime(timestr,"时间： %Y/%m/%d")).strftime("%Y-%m-%d")
-        l.append(dict)
+
+        timestr = (lil[1].text).split()
+        itemnum = timestr.__len__()/2
+        for i in range(itemnum):
+            dict = {}
+            dict['VNAME'] = '北京音乐厅'
+            dict['PRODUCTNAME'] = (lil[0].a.text).decode("string_escape")
+
+            dict['SHOWDATE'] = (datetime.strptime(timestr[itemnum*i+1],"%Y/%m/%d")).strftime("%Y-%m-%d")
+            l.append(dict)
 
     return l
 
